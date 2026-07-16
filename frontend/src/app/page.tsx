@@ -1,5 +1,9 @@
-
+import Hero from "@/components/landing/Hero";
 
 export default function Home() {
-     return <div>Website Optimization Agent</div>;
+  return (
+    <main className="min-h-screen bg-black">
+      <Hero />
+    </main>
+  );
 }
