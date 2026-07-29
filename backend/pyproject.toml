@@ -5,9 +5,9 @@ description = "Optiq - Multi-agent website optimization platform"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "fastapi>=0.115.0",
+    "fastapi[standard]>=0.115.0",
     "uvicorn[standard]>=0.30.0",
-    "crewai>=0.80.0",
+    "crewai[google-genai]>=0.80.0",
     "firecrawl-py>=1.0.0",
     "python-dotenv>=1.0.0",
 ]

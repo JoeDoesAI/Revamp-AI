@@ -35,7 +35,8 @@ async def analyze_website(request: AnalyzeRequest):
         # Step 2: Run the optimization crew
         logger.info("Starting CrewAI optimization analysis...")
         crew = create_optimizer_crew()
-        result = crew.kickoff(inputs={"url": request.url, "website_content": content})
+
+        result = await crew.kickoff_async(inputs={"url": request.url, "website_content": content})
 
         # Step 3: Parse the result
         logger.info("Parsing crew output...")

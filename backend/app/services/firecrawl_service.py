@@ -14,12 +14,15 @@ class FirecrawlService:
         if not api_key:
             raise ValueError("FIRECRAWL_API_KEY environment variable is not set")
         self.app = FirecrawlApp(api_key=api_key)
+        self.params = {
+            "formats": ["markdown"]
+        }
 
     def scrape(self, url: str) -> str:
         """Scrape a website and return its content as markdown."""
         logger.info(f"Scraping URL: {url}")
 
-        result = self.app.scrape_url(url, params={"formats": ["markdown"]})
+        result = self.app.scrape_url(url, **self.params)
 
         # Handle dict response
         if isinstance(result, dict):

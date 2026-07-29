@@ -1,5 +1,13 @@
-from crewai import Agent
+import os
+from crewai import Agent,LLM
 
+gemini_api_key = os.getenv("GEMINI_API_KEY")
+
+llm_model = LLM(
+    model="gemini/gemini-2.5-flash-lite",
+    temperature=0.7,
+    api_key=gemini_api_key
+)
 
 def create_discovery_agent() -> Agent:
     """Website Discovery Analyst — forms the foundation for all other agents."""
@@ -13,7 +21,7 @@ def create_discovery_agent() -> Agent:
             "foundation for all other specialists."
         ),
         verbose=True,
-        llm="gpt-4o-mini",
+        llm=llm_model,
         allow_delegation=False,
     )
 
@@ -29,7 +37,7 @@ def create_seo_agent() -> Agent:
             "link structure, and technical SEO factors to provide actionable recommendations."
         ),
         verbose=True,
-        llm="gpt-4o-mini",
+        llm=llm_model,
         allow_delegation=False,
     )
 
@@ -45,7 +53,7 @@ def create_ux_agent() -> Agent:
             "and overall user flow to identify friction points and improvement opportunities."
         ),
         verbose=True,
-        llm="gpt-4o-mini",
+        llm=llm_model,
         allow_delegation=False,
     )
 
@@ -61,7 +69,7 @@ def create_copy_agent() -> Agent:
             "copy and suggest improvements that drive engagement and conversions."
         ),
         verbose=True,
-        llm="gpt-4o-mini",
+        llm=llm_model,
         allow_delegation=False,
     )
 
@@ -78,7 +86,7 @@ def create_performance_agent() -> Agent:
             "opportunities."
         ),
         verbose=True,
-        llm="gpt-4o-mini",
+        llm=llm_model,
         allow_delegation=False,
     )
 
@@ -94,7 +102,7 @@ def create_conversion_agent() -> Agent:
             "journey to identify opportunities for improving conversion rates."
         ),
         verbose=True,
-        llm="gpt-4o-mini",
+        llm=llm_model,
         allow_delegation=False,
     )
 
@@ -110,7 +118,7 @@ def create_strategy_agent() -> Agent:
             "roadmap. You prioritize recommendations by impact and effort."
         ),
         verbose=True,
-        llm="gpt-4o-mini",
+        llm=llm_model,
         allow_delegation=False,
     )
 
@@ -126,6 +134,6 @@ def create_report_agent() -> Agent:
             "organize recommendations by priority. You always output valid, well-structured JSON."
         ),
         verbose=True,
-        llm="gpt-4o-mini",
+        llm=llm_model,
         allow_delegation=False,
     )
