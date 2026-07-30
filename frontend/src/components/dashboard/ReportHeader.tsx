@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Download, Share2, Globe } from "lucide-react";
 
-export default function ReportHeader() {
+interface ReportHeaderProps {
+  url: string;
+}
+
+export default function ReportHeader({ url }: ReportHeaderProps) {
+
   const current_time = new Date().toLocaleString();
+
   return (
     <header className="flex items-start justify-between">
 
@@ -21,7 +27,7 @@ export default function ReportHeader() {
           <div>
 
             <h2 className="font-semibold text-lg">
-              westminstertower.com
+              {url}
             </h2>
 
             <p className="text-sm text-text-secondary">
@@ -36,17 +42,12 @@ export default function ReportHeader() {
 
       <div className="flex gap-4">
 
-        <Button
-          variant="outline"
-          className="h-12 rounded-xl"
-        >
+        <Button variant="outline" className="h-12 rounded-xl">
           <Download className="mr-2 h-4 w-4" />
           Download PDF
         </Button>
 
-        <Button
-          className="h-12 rounded-xl"
-        >
+        <Button className="h-12 rounded-xl">
           <Share2 className="mr-2 h-4 w-4" />
           Share Report
         </Button>

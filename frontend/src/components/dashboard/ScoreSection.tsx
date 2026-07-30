@@ -19,7 +19,6 @@ interface Props {
     conversion_score: number;
   };
 }
-
 export default function ScoreSection({ report }: Props) {
     
   return (

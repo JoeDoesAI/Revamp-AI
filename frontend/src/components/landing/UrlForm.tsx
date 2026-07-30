@@ -10,16 +10,21 @@ import { useRouter } from "next/navigation";
 import { useState } from 'react'; 
 
 export default function UrlForm() {
+
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  
   const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
-  const { setReport } = useReportStore();
+  const { setReport,storeUrl } = useReportStore();
 
   const handleSubmit = async () => {
     try {
         setLoading(true);
+
+        storeUrl(url);
+
 
         const report = await analyzeWebsite(url);
 
@@ -54,18 +59,6 @@ export default function UrlForm() {
           placeholder="https://yourwebsite.com"
           className="h-14 rounded-xl border-input bg-background text-foreground placeholder:text-muted-foreground"
         />
-
-        {error && (
-          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
-            <h3 className="font-semibold text-red-700">
-              Analysis Failed
-            </h3>
-
-            <p className="mt-1 text-sm text-red-600">
-              {error}
-            </p>
-          </div>
-        )}
 
         <Button
           onClick={handleSubmit}
