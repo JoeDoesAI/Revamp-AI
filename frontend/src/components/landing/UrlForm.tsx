@@ -3,12 +3,19 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { analyzeWebsite } from "@/lib/revamp";
+import { useReportStore } from "@/store/reportStore";
+
+import { useRouter } from "next/navigation";
 
 import { useState } from 'react'; 
 
 export default function UrlForm() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
+  const { setReport } = useReportStore();
 
   const handleSubmit = async () => {
     try {
@@ -16,15 +23,26 @@ export default function UrlForm() {
 
         const report = await analyzeWebsite(url);
 
-        console.log(report);
+        setReport(report);
 
-    } catch (error) {
-        console.log(error)
-        // console.error(error);
-    } finally {
-        setLoading(false);
+        router.push("/report");
+
+
+    } catch (err: any) {
+    if (err.response?.status === 500) {
+      setError(
+        "Something went wrong while analyzing your website. Please try again in a moment."
+      );
+    } else {
+      setError(
+        err.response?.data?.detail ||
+          "Unable to analyze this website."
+      );
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   return (
@@ -36,6 +54,18 @@ export default function UrlForm() {
           placeholder="https://yourwebsite.com"
           className="h-14 rounded-xl border-input bg-background text-foreground placeholder:text-muted-foreground"
         />
+
+        {error && (
+          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
+            <h3 className="font-semibold text-red-700">
+              Analysis Failed
+            </h3>
+
+            <p className="mt-1 text-sm text-red-600">
+              {error}
+            </p>
+          </div>
+        )}
 
         <Button
           onClick={handleSubmit}

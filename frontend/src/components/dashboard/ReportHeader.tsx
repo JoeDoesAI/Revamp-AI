@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Download, Share2, Globe } from "lucide-react";
 
 export default function ReportHeader() {
+  const current_time = new Date().toLocaleString();
   return (
     <header className="flex items-start justify-between">
 
@@ -24,7 +25,7 @@ export default function ReportHeader() {
             </h2>
 
             <p className="text-sm text-text-secondary">
-              Analyzed Jul 17, 2026 • 10:42 AM
+              Analyzed {current_time}
             </p>
 
           </div>

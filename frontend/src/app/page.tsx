@@ -1,6 +1,7 @@
 import UrlForm from "../components/landing/UrlForm";
 
 
+
 export default function LandingPage() {
   return (
     <section className="relative overflow-hidden bg-background">
@@ -17,6 +18,7 @@ export default function LandingPage() {
           <p className="mt-8 text-2xl text-muted-foreground">
             Enter your website URL below
           </p>
+          
 
           <div className="mt-14">
             <UrlForm />
